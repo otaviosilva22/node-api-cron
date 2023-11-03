@@ -13,9 +13,9 @@ Crons são tarefas executadas automáticamente em forma de rotina. No Node.js a 
 A configuração da rotina é definida por 5 parâmetros:
 
 ```bash
-* * * * * * *
-| | | | | | | dia da semana
-| | | | | | mês
+* * * * * *
+| | | | | | dia da semana
+| | | | | mês
 | | | | dia mês
 | | | hora
 | | minuto

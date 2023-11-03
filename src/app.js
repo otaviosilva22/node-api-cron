@@ -3,14 +3,7 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
-const CronTaskController = require('./controllers/CronTaskController');
-const cronTaskController = new CronTaskController();
-
 const cron = require('node-cron');
-
-// Caso queira validar com um controller externo
-//cron.schedule("* * * * *", cronTaskController.execute);
-
 
 //A cada minuto
 cron.schedule("* * * * *", (req, res)=>{
@@ -21,11 +14,16 @@ cron.schedule("* * * * *", (req, res)=>{
             date
         })
     }catch(e){
-        return res.status(400).json({
-            error: e
+        return res.status(500).json({
+            error: e.message
         })
     }
 });
 
+const CronTaskController = require('./controllers/CronTaskController');
+const cronTaskController = new CronTaskController();
+
+// Caso queira validar com um controller externo
+//cron.schedule("* * * * *", cronTaskController.execute);
 
 module.exports = app;

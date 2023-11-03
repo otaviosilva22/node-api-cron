@@ -1,20 +1,31 @@
 const express = require('express');
-const cron = require('node-cron');
 
-//express use
 const app = express();
 app.use(express.json());
 
-//class Cron Job
-const CronJob = require('./functions/cron');
+const CronTaskController = require('./controllers/CronTaskController');
+const cronTaskController = new CronTaskController();
 
-//instance class
-const cronJob = new CronJob();
+const cron = require('node-cron');
 
-//rota http get
-app.get('/cronJob', cronJob.cron);
+// Caso queira validar com um controller externo
+//cron.schedule("* * * * *", cronTaskController.execute);
 
-//cron schedule
-cron.schedule("* * * * *", cronJob.cron); //cron que funciona de minuto em minuto
+
+//A cada minuto
+cron.schedule("* * * * *", (req, res)=>{
+    try{
+        let date = new Date();
+        console.log(date);
+        return res.status(200).json({
+            date
+        })
+    }catch(e){
+        return res.status(400).json({
+            error: e
+        })
+    }
+});
+
 
 module.exports = app;

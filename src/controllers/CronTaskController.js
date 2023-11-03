@@ -1,13 +1,13 @@
 
 
-class CronJob{
+class CronTaskController{
     
-    async cron(req, res){
+    async execute(req, res){
         try{
-            console.log(new Date());
-
+            let date = new Date();
+            console.log(date);
             return res.status(200).json({
-                date: new Date()
+                date
             })
         }catch(e){
             return res.status(400).json({
@@ -18,4 +18,4 @@ class CronJob{
 
 }
 
-module.exports = CronJob;
+module.exports = CronTaskController;

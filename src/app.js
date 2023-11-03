@@ -23,7 +23,7 @@ cron.schedule("* * * * *", (req, res)=>{
 const CronTaskController = require('./controllers/CronTaskController');
 const cronTaskController = new CronTaskController();
 
-// Caso queira validar com um controller externo
+// Caso queira validar com um controller externo 
 //cron.schedule("* * * * *", cronTaskController.execute);
 
 module.exports = app;
